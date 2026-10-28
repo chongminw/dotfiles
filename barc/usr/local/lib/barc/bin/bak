@@ -1,0 +1,66 @@
+#!/usr/bin/env bash
+# Independent GNU/Linux command; never sources shell configuration.
+# Sequential use only. Existing destinations are not overwritten; concurrent naming is unsupported.
+set -u
+if (( $# == 0 )); then
+    printf 'Usage: bak <file-or-directory> [more paths...]\n' >&2
+    exit 2
+fi
+status=0
+for source_path in "$@"; do
+    while [[ $source_path != / && $source_path == */ ]]; do source_path=${source_path%/}; done
+    if [[ ! -e $source_path && ! -L $source_path ]]; then
+        printf 'bak: path does not exist: %s\n' "$source_path" >&2
+        status=1
+        continue
+    fi
+    # Preserve symlinks as links. Resolve actual directories to reject /, /tmp/.. and . at /.
+    if [[ -d $source_path && ! -L $source_path ]]; then
+        # NUL-delimited output preserves directory names ending in newlines.
+        if ! IFS= read -r -d '' resolved < <(realpath -ez -- "$source_path"); then
+            status=1
+            continue
+        fi
+        if [[ $resolved == / ]]; then
+            printf 'bak: refusing to back up the root directory: %s\n' "$source_path" >&2
+            status=1
+            continue
+        fi
+        # Canonicalize directory aliases (., ..) so the backup is a sibling, not a child.
+        source_path=$resolved
+    fi
+    destination=$source_path.bak
+    index=1
+    while [[ -e $destination || -L $destination ]]; do
+        destination=$source_path$index.bak
+        ((index+=1))
+    done
+    # Stage beside the source; only a complete copy receives the final name.
+    parent_dir=.
+    if [[ $source_path == */* ]]; then
+        parent_dir=${source_path%/*}
+        parent_dir=${parent_dir:-/}
+    fi
+    if ! staging=$(mktemp -d -- "$parent_dir/.bak.incomplete.XXXXXX"); then
+        printf 'bak: cannot create staging directory: %s\n' "$source_path" >&2
+        status=1
+        continue
+    fi
+    if ! cp -aT -- "$source_path" "$staging/data"; then
+        printf 'bak: copy failed: %s; incomplete copy: %s\n' "$source_path" "$staging" >&2
+        status=1
+        continue
+    fi
+    # Same-filesystem publication; an existing destination is an error.
+    if ! mv -T --update=none-fail -- "$staging/data" "$destination"; then
+        printf 'bak: publish failed: %s; staged copy: %s\n' "$destination" "$staging" >&2
+        status=1
+        continue
+    fi
+    printf '%s -> %s\n' "$source_path" "$destination"
+    if ! rmdir -- "$staging"; then
+        printf 'bak: backup published; staging directory remains: %s\n' "$staging" >&2
+        status=1
+    fi
+done
+exit "$status"
