@@ -1,0 +1,7 @@
+// 壁纸和其他 layer-shell 表面的规则。
+// 当前 swaybg 图层的 namespace 为 wallpaper，已通过 niri msg layers 确认。
+
+layer-rule {
+    match namespace="^wallpaper$"
+    place-within-backdrop true
+}

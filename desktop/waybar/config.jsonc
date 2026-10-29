@@ -1,0 +1,117 @@
+{
+  "layer": "top",
+  "position": "top",
+  "height": 25,
+  "spacing": 6,
+  "reload_style_on_change": true,
+  "modules-left": ["custom/launcher", "niri/workspaces"],
+  "modules-center": ["clock", "custom/weather"],
+  "modules-right": ["group/tray-container", "memory", "disk", "network", "custom/notification", "custom/power"],
+
+  "custom/launcher": {
+    "format": "󰣇",
+    "tooltip-format": "应用启动器 · 点击开关",
+    "on-click": "\"$HOME/.local/bin/commenu\" launcher"
+  },
+  "niri/workspaces": {
+    "format": "{index}",
+    "disable-markup": true,
+    "tooltip": false,
+    "cursor": true
+  },
+  "clock": {
+    "format": "{:%Y-%m-%d %H:%M}",
+    "locale": "C",
+    "tooltip-format": "<tt>{calendar}</tt>",
+    "calendar": {
+      "iso8601": true,
+      "format": {
+        "today": "<span color='#9ecfff'><u>{}</u></span>"
+      }
+    }
+  },
+  "custom/weather": {
+    "exec": "python3 \"$HOME/.config/waybar/scripts/weather.py\"",
+    "return-type": "json",
+    "interval": 1800,
+    "exec-on-event": false
+  },
+  "memory": {
+    "interval": 10,
+    "format": "M:{percentage}%",
+    "tooltip-format": "内存 · {percentage}%\n已用  {used:.1f} / {total:.1f} GiB\n可用  {avail:.1f} GiB"
+  },
+  "disk": {
+    "interval": 60,
+    "unit": "GiB",
+    "format": "D:{percentage_used}%",
+    "tooltip-format": "磁盘 / · {percentage_used}%\n已用  {specific_used:.1f} / {specific_total:.1f} GiB\n可用  {specific_free:.1f} GiB"
+  },
+  "network": {
+    "interface": "wlp3s0",
+    "interval": 30,
+    "format": "S:--%",
+    "format-wifi": "S:{signalStrength}%",
+    "tooltip-format-wifi": "SSID · {essid}\nIP · {ipaddr}\n信号 · {signalStrength}%",
+    "tooltip-format-linked": "WLAN · 等待 IP 地址",
+    "tooltip-format-disconnected": "WLAN · 未连接\n点击打开 nmtui",
+    "tooltip-format-disabled": "WLAN · 无线已关闭\n点击打开 nmtui",
+    "on-click": "ghostty -e nmtui"
+  },
+  "custom/notification": {
+    "exec": "\"$HOME/.config/waybar/scripts/notification.sh\" status",
+    "return-type": "json",
+    "format": "{text}",
+    "interval": 5,
+    "on-click": "\"$HOME/.config/waybar/scripts/notification.sh\" dnd",
+    "on-click-middle": "\"$HOME/.config/waybar/scripts/notification.sh\" menu",
+    "on-click-right": "\"$HOME/.config/waybar/scripts/notification.sh\" history"
+  },
+  "custom/power": {
+    "format": "P",
+    "tooltip-format": "电源菜单",
+    "on-click": "\"$HOME/.local/bin/commenu\" power"
+  },
+  "group/tray-container": {
+    "orientation": "inherit",
+    "cursor": 68,
+    "modules": ["group/tray-drawer", "custom/tray-end"]
+  },
+  "group/tray-drawer": {
+    "orientation": "inherit",
+    "drawer": {
+      "click-to-reveal": true,
+      "transition-duration": 200
+    },
+    "modules": ["group/tray-toggle", "tray"]
+  },
+  "group/tray-toggle": {
+    "orientation": "inherit",
+    "modules": ["custom/tray-open", "custom/tray-close", "custom/tray-start"]
+  },
+  "custom/tray-open": {
+    "format": "O",
+    "tooltip-format": "托盘 · 点击展开",
+    "cursor": true
+  },
+  "custom/tray-close": {
+    "format": "C",
+    "tooltip-format": "托盘 · 点击收起",
+    "cursor": true
+  },
+  "custom/tray-start": {
+    "format": " [",
+    "tooltip": false,
+    "cursor": 68
+  },
+  "custom/tray-end": {
+    "format": "]",
+    "tooltip": false,
+    "cursor": 68
+  },
+  "tray": {
+    "cursor": 68,
+    "icon-size": 14,
+    "spacing": 6
+  }
+}

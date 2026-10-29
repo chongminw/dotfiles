@@ -1,0 +1,30 @@
+// 系统操作：帮助、截图、快捷键抑制、关闭屏幕和退出会话。
+binds {
+    // 快捷键帮助
+    Mod+Shift+Slash hotkey-overlay-title=null {
+        show-hotkey-overlay;
+    }
+    // 截图（适配没有独立 Print Screen 键的 68 键键盘）
+    Mod+Shift+S repeat=false hotkey-overlay-title="框选截图并标注" {
+        spawn-sh r#""${XDG_CONFIG_HOME:-$HOME/.config}/niri/scripts/screenshot.sh" annotate"#;
+    }
+    Mod+Ctrl+S repeat=false hotkey-overlay-title="框选截图并复制" {
+        spawn-sh r#""${XDG_CONFIG_HOME:-$HOME/.config}/niri/scripts/screenshot.sh" copy"#;
+    }
+    Mod+Alt+S repeat=false hotkey-overlay-title="截取当前窗口" {
+        screenshot-window;
+    }
+    // 会话控制
+    Mod+Escape allow-inhibiting=false hotkey-overlay-title="切换应用快捷键抑制" {
+        toggle-keyboard-shortcuts-inhibit;
+    }
+    Mod+Shift+P hotkey-overlay-title="关闭所有显示器" {
+        power-off-monitors;
+    }
+    Mod+Shift+E hotkey-overlay-title=null {
+        quit;
+    }
+    Ctrl+Alt+Delete hotkey-overlay-title="退出 Niri（需要确认）" {
+        quit;
+    }
+}

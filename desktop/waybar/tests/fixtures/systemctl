@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# 禁止测试触及真实电源操作。
+printf 'systemctl %s\n' "$*" >>"$WB_TEST_ACTION_LOG"

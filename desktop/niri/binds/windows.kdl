@@ -1,0 +1,215 @@
+// 窗口和列操作：概览、聚焦、移动、尺寸、浮动、全屏和标签页。
+
+binds {
+    Mod+O repeat=false hotkey-overlay-title="切换窗口概览" {
+        toggle-overview;
+    }
+
+    // 关闭窗口
+    Mod+Q repeat=false hotkey-overlay-title=null {
+        close-window;
+    }
+
+    // 聚焦窗口
+    Mod+Left hotkey-overlay-title="聚焦左侧列" {
+        focus-column-left;
+    }
+
+    Mod+Down hotkey-overlay-title="聚焦下方窗口" {
+        focus-window-down;
+    }
+
+    Mod+Up hotkey-overlay-title="聚焦上方窗口" {
+        focus-window-up;
+    }
+
+    Mod+Right hotkey-overlay-title="聚焦右侧列" {
+        focus-column-right;
+    }
+
+    Mod+H hotkey-overlay-title="聚焦左侧列（H）" {
+        focus-column-left;
+    }
+
+    Mod+J hotkey-overlay-title="聚焦下方窗口（J）" {
+        focus-window-down;
+    }
+
+    Mod+K hotkey-overlay-title="聚焦上方窗口（K）" {
+        focus-window-up;
+    }
+
+    Mod+L hotkey-overlay-title="聚焦右侧列（L）" {
+        focus-column-right;
+    }
+
+    // 移动窗口或列
+    Mod+Ctrl+Left hotkey-overlay-title="向左移动当前列" {
+        move-column-left;
+    }
+
+    Mod+Ctrl+Down hotkey-overlay-title="向下移动当前窗口" {
+        move-window-down;
+    }
+
+    Mod+Ctrl+Up hotkey-overlay-title="向上移动当前窗口" {
+        move-window-up;
+    }
+
+    Mod+Ctrl+Right hotkey-overlay-title="向右移动当前列" {
+        move-column-right;
+    }
+
+    Mod+Ctrl+H hotkey-overlay-title="向左移动当前列（H）" {
+        move-column-left;
+    }
+
+    Mod+Ctrl+J hotkey-overlay-title="向下移动当前窗口（J）" {
+        move-window-down;
+    }
+
+    Mod+Ctrl+K hotkey-overlay-title="向上移动当前窗口（K）" {
+        move-window-up;
+    }
+
+    Mod+Ctrl+L hotkey-overlay-title="向右移动当前列（L）" {
+        move-column-right;
+    }
+
+    // 第一列和最后一列
+    Mod+Home hotkey-overlay-title="聚焦第一列" {
+        focus-column-first;
+    }
+
+    Mod+End hotkey-overlay-title="聚焦最后一列" {
+        focus-column-last;
+    }
+
+    Mod+Ctrl+Home hotkey-overlay-title="把当前列移到最前" {
+        move-column-to-first;
+    }
+
+    Mod+Ctrl+End hotkey-overlay-title="把当前列移到最后" {
+        move-column-to-last;
+    }
+
+    // 鼠标滚轮移动列
+    Mod+WheelScrollRight hotkey-overlay-title="滚轮聚焦右侧列" {
+        focus-column-right;
+    }
+
+    Mod+WheelScrollLeft hotkey-overlay-title="滚轮聚焦左侧列" {
+        focus-column-left;
+    }
+
+    Mod+Ctrl+WheelScrollRight hotkey-overlay-title="滚轮向右移动当前列" {
+        move-column-right;
+    }
+
+    Mod+Ctrl+WheelScrollLeft hotkey-overlay-title="滚轮向左移动当前列" {
+        move-column-left;
+    }
+
+    Mod+Shift+WheelScrollDown hotkey-overlay-title="纵向滚轮聚焦右侧列" {
+        focus-column-right;
+    }
+
+    Mod+Shift+WheelScrollUp hotkey-overlay-title="纵向滚轮聚焦左侧列" {
+        focus-column-left;
+    }
+
+    Mod+Ctrl+Shift+WheelScrollDown hotkey-overlay-title="纵向滚轮向右移动当前列" {
+        move-column-right;
+    }
+
+    Mod+Ctrl+Shift+WheelScrollUp hotkey-overlay-title="纵向滚轮向左移动当前列" {
+        move-column-left;
+    }
+
+    // 合并或移出窗口
+    Mod+BracketLeft hotkey-overlay-title="向左合并或移出窗口" {
+        consume-or-expel-window-left;
+    }
+
+    Mod+BracketRight hotkey-overlay-title="向右合并或移出窗口" {
+        consume-or-expel-window-right;
+    }
+
+    Mod+Comma hotkey-overlay-title="把右侧窗口并入当前列" {
+        consume-window-into-column;
+    }
+
+    Mod+Period hotkey-overlay-title="把底部窗口移出当前列" {
+        expel-window-from-column;
+    }
+
+    // 调整列宽和窗口高度
+    Mod+R hotkey-overlay-title="循环切换预设列宽" {
+        switch-preset-column-width;
+    }
+
+    Mod+Shift+R hotkey-overlay-title="反向循环预设列宽" {
+        switch-preset-column-width-back;
+    }
+
+    Mod+Ctrl+Shift+R hotkey-overlay-title="循环切换预设窗口高度" {
+        switch-preset-window-height;
+    }
+
+    Mod+Ctrl+R hotkey-overlay-title="重置窗口高度" {
+        reset-window-height;
+    }
+
+    Mod+Minus hotkey-overlay-title="列宽减少 10%" {
+        set-column-width "-10%";
+    }
+
+    Mod+Equal hotkey-overlay-title="列宽增加 10%" {
+        set-column-width "+10%";
+    }
+
+    Mod+Shift+Minus hotkey-overlay-title="窗口高度减少 10%" {
+        set-window-height "-10%";
+    }
+
+    Mod+Shift+Equal hotkey-overlay-title="窗口高度增加 10%" {
+        set-window-height "+10%";
+    }
+
+    // 最大化、居中、浮动和标签页
+    Mod+F hotkey-overlay-title="最大化当前列" {
+        maximize-column;
+    }
+
+    Mod+Shift+F hotkey-overlay-title="切换窗口全屏" {
+        fullscreen-window;
+    }
+
+    Mod+M hotkey-overlay-title="窗口扩展到屏幕边缘" {
+        maximize-window-to-edges;
+    }
+
+    Mod+Ctrl+F hotkey-overlay-title="当前列填满可用宽度" {
+        expand-column-to-available-width;
+    }
+
+    Mod+C hotkey-overlay-title="当前列居中" {
+        center-column;
+    }
+
+    Mod+Ctrl+C hotkey-overlay-title="所有可见列居中" {
+        center-visible-columns;
+    }
+
+    Mod+V hotkey-overlay-title="切换窗口平铺或浮动" {
+        toggle-window-floating;
+    }
+
+    Mod+Shift+V hotkey-overlay-title="切换平铺区与浮动区焦点" {
+        switch-focus-between-floating-and-tiling;
+    }
+
+    Mod+W hotkey-overlay-title="切换当前列标签页模式" {
+        toggle-column-tabbed-display;
+    }
+}

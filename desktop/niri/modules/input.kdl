@@ -1,0 +1,6 @@
+// 输入设备：键盘、鼠标、触摸板。
+input {
+    keyboard {
+        numlock
+    }
+}

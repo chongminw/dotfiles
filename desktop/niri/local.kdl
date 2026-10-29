@@ -1,0 +1,18 @@
+// 本机配置：显示器、资源路径和系统特定启动项。
+// output 条目不会按名称跨文件合并；DP-1 只在这里定义。
+
+output "DP-1" {
+    mode "3840x2160@120.000"
+    scale 1.25
+    position x=0 y=0
+    focus-at-startup
+}
+
+// 内置截图的保存路径。
+screenshot-path "~/.pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
+
+// 会话启动时加载壁纸；修改路径时同步检查资源是否存在。
+spawn-at-startup "swaybg" "-i" "/home/min/.pictures/Wallpapers/6.png" "-m" "fill" "-c" "#1e1e2e"
+
+// 本机安装的权限认证代理。
+spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"

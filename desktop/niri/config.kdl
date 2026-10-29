@@ -1,0 +1,20 @@
+// niri 配置入口：按职责加载模块，明确维护加载顺序。
+// 相对路径以本文件所在目录为基准。
+
+include "modules/environment.kdl"
+include "modules/input.kdl"
+include "modules/autostart.kdl"
+include "modules/behavior.kdl"
+include "modules/layout.kdl"
+include "modules/animations.kdl"
+include "modules/window-rules.kdl"
+include "modules/layer-rules.kdl"
+
+include "binds/applications.kdl"
+include "binds/windows.kdl"
+include "binds/workspaces.kdl"
+include "binds/monitors.kdl"
+include "binds/system.kdl"
+
+// 本机差异集中放在最后；避免在通用模块重复定义同一显示器。
+include "local.kdl"

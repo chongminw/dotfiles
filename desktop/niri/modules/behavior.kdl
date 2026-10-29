@@ -1,0 +1,8 @@
+// 通用窗口行为和快捷键提示面板。
+
+prefer-no-csd
+
+hotkey-overlay {
+    skip-at-startup
+    hide-not-bound
+}
