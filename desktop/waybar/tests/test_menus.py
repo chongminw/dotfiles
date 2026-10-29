@@ -15,16 +15,16 @@ from pathlib import Path
 
 ROOT = Path(__file__).resolve().parents[1]
 KINDS = ("launcher", "power", "notification")
-# Candidate trees keep the public package beside Waybar. Installed tests use
+# Repository trees keep commenu/{bin,lib} beside Waybar. Installed tests use
 # the invoking user's package; every test copies it into a private HOME.
 MENU_ROOT = Path(os.environ.get("COMMENU_TEST_ROOT", (
-    ROOT.parent / "commenu"
-    if (ROOT.parent / "commenu/menu-common.sh").is_file()
+    ROOT.parent / "commenu/lib"
+    if (ROOT.parent / "commenu/lib/menu-common.sh").is_file()
     else Path.home() / ".local/lib/commenu"
 )))
 MENU_BIN = Path(os.environ.get("COMMENU_TEST_BIN", (
-    ROOT.parent / "bin/commenu"
-    if (ROOT.parent / "bin/commenu").is_file()
+    ROOT.parent / "commenu/bin/commenu"
+    if (ROOT.parent / "commenu/bin/commenu").is_file()
     else Path.home() / ".local/bin/commenu"
 )))
 
