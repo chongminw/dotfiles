@@ -1,0 +1,30 @@
+# 字体与配色
+font-family = JetBrainsMono Nerd Font
+font-size = 12
+theme = Dracula
+
+# 窗口留白（单位为 pt，随屏幕 DPI 缩放）
+window-padding-x = 6
+window-padding-y = 4
+window-padding-balance = true
+
+# 输入时隐藏鼠标，移动鼠标后恢复显示
+mouse-hide-while-typing = true
+
+# 回滚缓冲上限 32 MiB，每个终端分屏按需分配；新建终端时生效
+scrollback-limit = 33554432
+
+# 暂停分屏尺寸快捷键，等待 GTK 分屏布局问题修复；ignore 避免把方向键字符送入终端
+keybind = ctrl+alt+shift+arrow_left=ignore
+keybind = ctrl+alt+shift+arrow_right=ignore
+keybind = ctrl+alt+shift+arrow_up=ignore
+keybind = ctrl+alt+shift+arrow_down=ignore
+
+# 同时停用 Ghostty 的默认尺寸快捷键；Niri 仍可用该组合跨显示器移动窗口列
+keybind = super+ctrl+shift+arrow_left=ignore
+keybind = super+ctrl+shift+arrow_right=ignore
+keybind = super+ctrl+shift+arrow_up=ignore
+keybind = super+ctrl+shift+arrow_down=ignore
+
+# 沿用直接关闭终端的选择
+confirm-close-surface = false
