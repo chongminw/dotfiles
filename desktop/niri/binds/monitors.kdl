@@ -1,0 +1,53 @@
+// 显示器操作：聚焦显示器，以及在显示器之间移动列。
+binds {
+    // 显示器焦点
+    Mod+Shift+Left hotkey-overlay-title="聚焦左侧显示器" {
+        focus-monitor-left;
+    }
+    Mod+Shift+Down hotkey-overlay-title="聚焦下方显示器" {
+        focus-monitor-down;
+    }
+    Mod+Shift+Up hotkey-overlay-title="聚焦上方显示器" {
+        focus-monitor-up;
+    }
+    Mod+Shift+Right hotkey-overlay-title="聚焦右侧显示器" {
+        focus-monitor-right;
+    }
+    Mod+Shift+H hotkey-overlay-title="聚焦左侧显示器（H）" {
+        focus-monitor-left;
+    }
+    Mod+Shift+J hotkey-overlay-title="聚焦下方显示器（J）" {
+        focus-monitor-down;
+    }
+    Mod+Shift+K hotkey-overlay-title="聚焦上方显示器（K）" {
+        focus-monitor-up;
+    }
+    Mod+Shift+L hotkey-overlay-title="聚焦右侧显示器（L）" {
+        focus-monitor-right;
+    }
+    // 把当前列移动到其他显示器
+    Mod+Ctrl+Shift+Left hotkey-overlay-title="把当前列移到左侧显示器" {
+        move-column-to-monitor-left;
+    }
+    Mod+Ctrl+Shift+Down hotkey-overlay-title="把当前列移到下方显示器" {
+        move-column-to-monitor-down;
+    }
+    Mod+Ctrl+Shift+Up hotkey-overlay-title="把当前列移到上方显示器" {
+        move-column-to-monitor-up;
+    }
+    Mod+Ctrl+Shift+Right hotkey-overlay-title="把当前列移到右侧显示器" {
+        move-column-to-monitor-right;
+    }
+    Mod+Ctrl+Shift+H hotkey-overlay-title="把当前列移到左侧显示器（H）" {
+        move-column-to-monitor-left;
+    }
+    Mod+Ctrl+Shift+J hotkey-overlay-title="把当前列移到下方显示器（J）" {
+        move-column-to-monitor-down;
+    }
+    Mod+Ctrl+Shift+K hotkey-overlay-title="把当前列移到上方显示器（K）" {
+        move-column-to-monitor-up;
+    }
+    Mod+Ctrl+Shift+L hotkey-overlay-title="把当前列移到右侧显示器（L）" {
+        move-column-to-monitor-right;
+    }
+}

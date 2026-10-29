@@ -1,0 +1,24 @@
+// 窗口布局：间距、列宽、焦点框和边框。
+// 保持 border 的显式 on/off；子配置中的 border {} 不会自动开启边框。
+layout {
+    // 壁纸放入概览背景层后，让工作区透出同一张壁纸。
+    background-color "transparent"
+    gaps 8
+    center-focused-column "never"
+    preset-column-widths {
+        proportion 0.33333
+        proportion 0.5
+        proportion 0.66667
+    }
+    default-column-width {
+        proportion 0.5
+    }
+    focus-ring {
+        width 3
+        active-color "#cba6f7"
+        inactive-color "#505050"
+    }
+    border {
+        off
+    }
+}

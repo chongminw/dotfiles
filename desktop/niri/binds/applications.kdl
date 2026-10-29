@@ -1,0 +1,15 @@
+// 应用程序启动：终端、启动器、文件管理器和浏览器。
+binds {
+    Mod+T hotkey-overlay-title=null {
+        spawn "ghostty";
+    }
+    Mod+D hotkey-overlay-title=null {
+        spawn-sh r#""$HOME/.local/bin/commenu" launcher"#;
+    }
+    Mod+E hotkey-overlay-title=null {
+        spawn "nautilus";
+    }
+    Mod+B hotkey-overlay-title=null {
+        spawn "firefox";
+    }
+}

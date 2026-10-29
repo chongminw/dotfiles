@@ -1,0 +1,27 @@
+#!/usr/bin/env bash
+# Shared desktop entry point; menu implementations are independent of Waybar.
+set -u
+
+usage() {
+    builtin printf '%s\n' \
+        '用法: commenu {launcher [fuzzel 参数...]|power}' \
+        '  launcher  开关应用启动器，再次调用关闭' \
+        '  power     开关电源菜单，Esc 取消' \
+        '  --help    显示帮助'
+}
+
+case ${1:-help} in
+    launcher)
+        shift
+        exec "$HOME/.local/lib/commenu/toggle-launcher.sh" "$@"
+        ;;
+    power)
+        (( $# == 1 )) || { usage >&2; exit 2; }
+        exec "$HOME/.local/lib/commenu/powermenu.sh"
+        ;;
+    help|-h|--help)
+        (( $# <= 1 )) || { usage >&2; exit 2; }
+        usage
+        ;;
+    *) usage >&2; exit 2 ;;
+esac

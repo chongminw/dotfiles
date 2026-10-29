@@ -1,0 +1,17 @@
+#!/usr/bin/env bash
+# 离线替身：只记录菜单与返回测试输入，绝不连接桌面。
+printf '%s\n' "$*" >>"$WB_TEST_MENU_LOG"
+if [[ " $* " == *' --dmenu '* ]]; then
+    mapfile -t entries
+    printf '%s\n' "${entries[@]}" >>"${WB_TEST_MENU_LOG}.items"
+    choice="${WB_TEST_CHOICE-WAIT}"
+    [[ "$choice" != DEFAULT ]] || choice="${entries[0]:-}"
+else
+    choice=WAIT
+fi
+if [[ "$choice" == WAIT ]]; then
+    trap 'exit 1' TERM INT
+    while :; do sleep 0.05; done
+fi
+[[ "$choice" != ESC ]] || exit 1
+printf '%s\n' "$choice"

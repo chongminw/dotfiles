@@ -1,0 +1,6 @@
+// 会话环境变量；更改后在下次启动的应用中确认效果。
+
+environment {
+    LC_MESSAGES "zh_CN.UTF-8"
+    XMODIFIERS "@im=fcitx"
+}

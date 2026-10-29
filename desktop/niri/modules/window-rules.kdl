@@ -1,0 +1,10 @@
+// 窗口规则按声明顺序加载；通用规则在前，应用规则在后。
+// Firefox 画中画窗口默认以固定尺寸浮动。
+window-rule {
+    match app-id=r#"firefox$"# title="^(Picture-in-Picture|画中画)$"
+    open-floating true
+    open-focused false
+    default-column-width { fixed 680; }
+    default-window-height { fixed 470; }
+    default-floating-position x=24 y=24 relative-to="bottom-right"
+}

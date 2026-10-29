@@ -1,0 +1,61 @@
+// 工作区操作：切换、移动、重排，以及编号和滚轮操作。
+binds {
+    // 相邻工作区
+    Mod+Page_Down hotkey-overlay-title="切换到下一个工作区" {
+        focus-workspace-down;
+    }
+    Mod+Page_Up hotkey-overlay-title="切换到上一个工作区" {
+        focus-workspace-up;
+    }
+    Mod+U hotkey-overlay-title="切换到下一个工作区（U）" {
+        focus-workspace-down;
+    }
+    Mod+I hotkey-overlay-title="切换到上一个工作区（I）" {
+        focus-workspace-up;
+    }
+    Mod+Ctrl+Page_Down hotkey-overlay-title="把当前列移到下一工作区" {
+        move-column-to-workspace-down;
+    }
+    Mod+Ctrl+Page_Up hotkey-overlay-title="把当前列移到上一工作区" {
+        move-column-to-workspace-up;
+    }
+    Mod+Ctrl+U hotkey-overlay-title="把当前列移到下一工作区（U）" {
+        move-column-to-workspace-down;
+    }
+    Mod+Ctrl+I hotkey-overlay-title="把当前列移到上一工作区（I）" {
+        move-column-to-workspace-up;
+    }
+    // 重排工作区
+    Mod+Shift+Page_Down hotkey-overlay-title="向下重排当前工作区" {
+        move-workspace-down;
+    }
+    Mod+Shift+Page_Up hotkey-overlay-title="向上重排当前工作区" {
+        move-workspace-up;
+    }
+    Mod+Shift+U hotkey-overlay-title="向下重排当前工作区（U）" {
+        move-workspace-down;
+    }
+    Mod+Shift+I hotkey-overlay-title="向上重排当前工作区（I）" {
+        move-workspace-up;
+    }
+    // 鼠标滚轮切换工作区
+    Mod+WheelScrollDown cooldown-ms=150 hotkey-overlay-title="滚轮切换到下一工作区" {
+        focus-workspace-down;
+    }
+    Mod+WheelScrollUp cooldown-ms=150 hotkey-overlay-title="滚轮切换到上一工作区" {
+        focus-workspace-up;
+    }
+    Mod+Ctrl+WheelScrollDown cooldown-ms=150 hotkey-overlay-title="滚轮把当前列移到下一工作区" {
+        move-column-to-workspace-down;
+    }
+    Mod+Ctrl+WheelScrollUp cooldown-ms=150 hotkey-overlay-title="滚轮把当前列移到上一工作区" {
+        move-column-to-workspace-up;
+    }
+    // 编号工作区
+    Mod+1 hotkey-overlay-title="切换到工作区 1" { focus-workspace 1; }
+    Mod+2 hotkey-overlay-title="切换到工作区 2" { focus-workspace 2; }
+    Mod+3 hotkey-overlay-title="切换到工作区 3" { focus-workspace 3; }
+    Mod+Ctrl+1 hotkey-overlay-title="把当前列移到工作区 1" { move-column-to-workspace 1; }
+    Mod+Ctrl+2 hotkey-overlay-title="把当前列移到工作区 2" { move-column-to-workspace 2; }
+    Mod+Ctrl+3 hotkey-overlay-title="把当前列移到工作区 3" { move-column-to-workspace 3; }
+}

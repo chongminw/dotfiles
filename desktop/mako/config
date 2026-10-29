@@ -1,0 +1,66 @@
+# Mako 通知中心配置（Catppuccin Mocha 主题 — 淡紫色）
+
+# 外观设置
+font=Sans 11
+background-color=#1e1e2ef2
+text-color=#cdd6f4
+border-color=#cba6f7
+progress-color=over #313244
+width=360
+height=160
+margin=10
+padding=14
+border-size=3
+border-radius=0
+
+# 位置与层级
+anchor=top-right
+layer=overlay
+outer-margin=16
+
+# 内容与格式
+icons=1
+max-icon-size=48
+icon-border-radius=8
+markup=1
+actions=1
+format=<b>%s</b>\n%b
+
+# 行为与历史
+default-timeout=7000
+ignore-timeout=0
+max-visible=5
+max-history=20
+history=1
+sort=-time
+
+# 低优先级通知
+[urgency=low]
+border-color=#89dceb
+default-timeout=4000
+
+# 普通优先级通知
+[urgency=normal]
+border-color=#cba6f7
+default-timeout=7000
+
+# 关键优先级通知：暖色强调 + 更长停留时间
+[urgency=critical]
+border-color=#fab387
+default-timeout=12000
+
+# Waybar 左键切换勿扰。先隐藏新通知，再异步归档，避免弹窗闪现。
+# mako 1.11 的 on-notify=dismiss 会在归档后读取空 surface，必须使用 exec 异步调用。
+[mode=do-not-disturb]
+invisible=1
+on-notify=exec timeout 2 makoctl dismiss -n "$id" >/dev/null 2>&1
+
+# 仅手动恢复的通知可绕过勿扰，不改变全局模式，也不再次触发归档。
+[mode=do-not-disturb category=waybar.manual-history]
+invisible=0
+on-notify=none
+group-by=none
+
+# 清理历史时临时隐藏恢复的记录；结束后移除该模式，原勿扰状态不变。
+[mode=waybar-cleanup]
+invisible=1

@@ -1,0 +1,3 @@
+#!/usr/bin/env bash
+# 禁止测试退出真实桌面会话。
+printf 'niri %s\n' "$*" >>"$WB_TEST_ACTION_LOG"

@@ -1,0 +1,139 @@
+/* 高度在 config.jsonc 的 height 调整；字号、内边距在这里调整。 */
+@define-color bar_fg #f5f5f5;
+@define-color bar_accent #9ecfff;
+@define-color bar_line rgba(255, 255, 255, 0.14);
+
+* {
+    font-family: "JetBrainsMono Nerd Font", monospace;
+    font-size: 13px;
+    font-weight: bold;
+    min-height: 0;
+    padding: 0;
+    margin: 0;
+    border: none;
+    border-radius: 0;
+    box-shadow: none;
+    text-shadow: none;
+    background-image: none;
+    animation: none;
+    transition: none;
+}
+
+window#waybar {
+    background-color: transparent;
+    color: @bar_fg;
+    border-bottom: 1px solid @bar_line;
+}
+
+.modules-left,
+.modules-right {
+    /* 左右区域边缘留白；不增加上下空间。 */
+    padding: 0 6px;
+}
+
+#custom-launcher,
+#clock,
+#custom-weather,
+#memory,
+#disk,
+#network,
+#custom-notification,
+#custom-power,
+#custom-tray-open,
+#custom-tray-close,
+#custom-tray-start,
+#custom-tray-end,
+#tray {
+    color: @bar_fg;
+    background-color: transparent;
+    padding: 0 3px; /* 每侧 3px 加 spacing 6px，模块之间统一为 12px。 */
+}
+
+#workspaces button {
+    color: @bar_fg;
+    background-color: transparent;
+    min-width: 0;
+    padding: 0 6px;
+    border-bottom: 1px solid transparent;
+}
+
+/* 工作区内部留 12px；首尾与其他模块使用同样的 3px 留白。 */
+#workspaces button:first-child {
+    padding-left: 3px;
+}
+
+#workspaces button:last-child {
+    padding-right: 3px;
+}
+
+/* 开关文字跟随抽屉状态；留白放在外层，O/C 自身不加内边距。 */
+#tray-toggle {
+    padding-left: 3px;
+}
+
+#custom-tray-open,
+#custom-tray-close {
+    font-size: 0;
+    min-width: 0;
+    padding: 0;
+    opacity: 0;
+}
+
+#tray-drawer:not(:hover) #custom-tray-open,
+#tray-drawer:hover #custom-tray-close {
+    font-size: inherit;
+    padding: 0;
+    opacity: 1;
+}
+
+/* 左括号在两种状态共用，右括号位于动画区域之外。 */
+#custom-tray-start {
+    padding: 0 2px 0 0;
+}
+
+/* 括号与托盘图标之间保留紧凑的留白。 */
+#tray-drawer #tray {
+    padding: 0 2px;
+}
+
+#custom-tray-end {
+    padding: 0 3px 0 2px;
+}
+
+/* 弹出菜单和 tooltip 共用配色。 */
+menu,
+tooltip {
+    background-color: rgba(20, 23, 27, 0.96);
+    color: @bar_fg;
+}
+
+menu {
+    border: 1px solid @bar_line;
+    padding: 4px;
+}
+
+menu menuitem {
+    padding: 4px 8px;
+}
+
+menu menuitem:hover {
+    color: @bar_accent;
+    background-color: rgba(158, 207, 255, 0.15);
+}
+
+#workspaces button.active,
+#workspaces button.focused {
+    color: @bar_accent;
+    border-bottom-color: rgba(158, 207, 255, 0.8);
+}
+
+#custom-launcher:hover,
+#workspaces button:hover {
+    color: @bar_accent;
+    background-color: transparent;
+}
+
+tooltip label {
+    color: @bar_fg;
+    padding: 6px;
+}

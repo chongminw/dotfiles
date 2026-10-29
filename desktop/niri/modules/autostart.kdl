@@ -1,0 +1,3 @@
+// 通用会话启动项；本机壁纸和认证代理由 local.kdl 管理。
+spawn-at-startup "mako"
+// fcitx5 由 XDG 会话自动启动；不要在这里重复启动。
