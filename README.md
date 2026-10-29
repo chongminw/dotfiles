@@ -12,6 +12,7 @@ dotfiles/
     ├── niri/                 # 窗口管理器配置、快捷键及截图脚本
     ├── mako/                 # 通知服务配置
     ├── waybar/               # 状态栏配置、天气与通知脚本
+    ├── ghostty/              # 终端配置、回滚缓冲和分屏快捷键
     └── commenu/
         ├── bin/commenu       # 公共菜单命令入口
         └── lib/              # 启动器、电源菜单和菜单会话管理
@@ -26,6 +27,7 @@ dotfiles/
 | niri | [配置维护说明](desktop/niri/README.md) |
 | mako | [通知配置](desktop/mako/config) |
 | Waybar | [状态栏与脚本说明](desktop/waybar/README.md) |
+| Ghostty | [终端配置说明](desktop/ghostty/README.md) |
 | commenu | [公共菜单说明](desktop/commenu/lib/README.md) |
 
 ## 目录与组件关系

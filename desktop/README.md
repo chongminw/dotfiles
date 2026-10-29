@@ -7,6 +7,7 @@ desktop/
 ├── niri/                 # 配置入口、模块、快捷键、截图脚本及测试
 ├── mako/                 # 通知服务配置
 ├── waybar/               # 状态栏配置、天气与通知脚本及测试
+├── ghostty/              # 终端配置和分屏快捷键说明
 └── commenu/
     ├── bin/commenu       # 公共菜单命令入口
     └── lib/              # 启动器、电源菜单和公共会话管理
@@ -17,6 +18,7 @@ desktop/
 - [niri/README.md](niri/README.md)：模块职责及快捷键；配置入口为 [niri/config.kdl](niri/config.kdl)。
 - [mako/config](mako/config)：通知外观、勿扰及 Waybar 通知操作需要的规则。
 - [waybar/README.md](waybar/README.md)：状态栏模块和脚本说明；配置入口为 [waybar/config.jsonc](waybar/config.jsonc)。
+- [ghostty/README.md](ghostty/README.md)：终端配置、回滚缓冲及分屏操作说明；配置入口为 [ghostty/config.ghostty](ghostty/config.ghostty)。尺寸调整快捷键因 GTK 布局问题暂时停用。
 - [commenu/lib/README.md](commenu/lib/README.md)：公共菜单说明；命令入口为 [commenu/bin/commenu](commenu/bin/commenu)。
 
 ## 组件关系与现用位置
@@ -30,6 +32,7 @@ Waybar 的通知状态、勿扰、历史恢复与清理脚本配合 mako 配置�
 | `niri/` | `~/.config/niri/` |
 | `mako/` | `~/.config/mako/` |
 | `waybar/` | `~/.config/waybar/` |
+| `ghostty/` | `~/.config/ghostty/` |
 | `commenu/bin/commenu` | `~/.local/bin/commenu` |
 | `commenu/lib/` | `~/.local/lib/commenu/` |
 
