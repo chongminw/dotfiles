@@ -26,8 +26,8 @@ dotfiles/
 | 桌面集合 | [目录导航、组件关系与现用位置](desktop/README.md) |
 | niri | [配置维护说明](desktop/niri/README.md) |
 | mako | [通知配置](desktop/mako/config) |
-| Waybar | [状态栏与脚本说明](desktop/waybar/README.md) |
-| Ghostty | [终端配置说明](desktop/ghostty/README.md) |
+| waybar | [状态栏与脚本说明](desktop/waybar/README.md) |
+| ghostty | [终端配置说明](desktop/ghostty/README.md) |
 | commenu | [公共菜单说明](desktop/commenu/lib/README.md) |
 
 ## 目录与组件关系
@@ -36,8 +36,8 @@ dotfiles/
 其中 `home/` 表示用户主目录下的内容；桌面组件各自直接收纳配置和源码。
 
 barc 的用户登录入口加载 [session.bash](barc/home/.config/barc/session.bash)，满足 tty1 等条件时启动 `niri-session -l`。
-Niri 和 Waybar 共用 `commenu` 提供启动器、电源菜单；Waybar 的通知菜单也复用其菜单会话管理。
-Waybar 的通知状态、勿扰和历史操作配合 mako 配置使用。
+niri 和 Waybar 共用 `commenu` 提供启动器、电源菜单；Waybar 的通知菜单也复用其菜单会话管理。
+waybar 的通知状态、勿扰和历史操作配合 mako 配置使用。
 
 ## 维护方式
 
