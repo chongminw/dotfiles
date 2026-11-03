@@ -33,7 +33,7 @@
   "custom/weather": {
     "exec": "python3 \"$HOME/.config/waybar/scripts/weather.py\"",
     "return-type": "json",
-    "interval": 1800,
+    "interval": 900,
     "exec-on-event": false
   },
   "memory": {
