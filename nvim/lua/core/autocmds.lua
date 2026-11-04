@@ -84,7 +84,6 @@ api.nvim_create_autocmd("FileType", {
         "checkhealth",
         "help",
         "lspinfo",
-        "man",
         "qf",
         "query",
         "startuptime",

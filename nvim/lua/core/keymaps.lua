@@ -24,6 +24,12 @@ map("n", "<leader>w", "<cmd>write<CR>", opts("保存文件"))
 map("n", "<leader>q", "<cmd>bdelete<cr>", opts("关闭当前缓冲区"))
 map("n", "<leader>Q", "<cmd>quitall<cr>", opts("退出 Neovim"))
 
+-- —————————— 撤销历史 ——————————
+map("n", "<leader>u", function()
+    vim.cmd.packadd("nvim.undotree")
+    require("undotree").open({ command = "topleft 35vnew" })
+end, opts("切换撤销树"))
+
 -- —————————— 搜索优化 ——————————
 map("n", "<leader>h", "<cmd>nohlsearch<cr>", opts("清除搜索高亮"))
 

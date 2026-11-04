@@ -1,4 +1,3 @@
-local paths = require("config.paths")
 -- 核心前置配置
 vim.g.mapleader = " "
 -- 标记为“0.12 默认”的选项用于明确个人偏好，当前暂时显式保留
@@ -11,7 +10,6 @@ vim.opt.wrap             = false   -- 不自动折行，长行横向滚动
 vim.opt.scrolloff        = 10      -- 光标上下最少保留行数
 vim.opt.sidescrolloff    = 10      -- 光标左右最少保留列数
 vim.opt.signcolumn       = "yes"   -- 始终显示符号列，防止界面抖动
-vim.opt.showmatch        = true    -- 高亮匹配的括号
 vim.opt.cmdheight        = 0       -- 命令行高度
 vim.opt.showmode         = false   -- 关闭默认模式提示
 vim.opt.fillchars        = { eob = " " } -- 隐藏缓冲区末尾的 ~ 符号
@@ -55,8 +53,6 @@ vim.opt.backup           = false   -- 关闭永久备份文件（0.12 默认，�
 vim.opt.writebackup      = true    -- 写入时临时备份（0.12 默认，显式保留）
 vim.opt.swapfile         = false   -- 关闭交换文件
 vim.opt.undofile         = true    -- 开启持久化撤销
-vim.opt.undodir          = paths.undo -- 撤销文件存储路径
 
--- —————————— 颜色与主题 ——————————
+-- —————————— 终端颜色 ——————————
 vim.opt.termguicolors    = true    -- 开启终端真彩色
-vim.cmd.colorscheme("catppuccin")    -- 应用配色主题

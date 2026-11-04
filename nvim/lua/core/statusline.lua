@@ -14,8 +14,8 @@ local defaults = {
     },
 }
 
-M.config = vim.deepcopy(defaults)
-M.components = {}
+local config = vim.deepcopy(defaults)
+local components = {}
 
 -- —————————— 模式定义 ——————————
 -- 行/块变体复用基础模式的高亮组，颜色来源只在基础模式中定义。
@@ -108,10 +108,7 @@ local modes = {
     },
 }
 
-local cache = {
-    diagnostics = {},
-    file_sizes = {},
-}
+local file_sizes = {}
 
 -- —————————— 通用工具函数 ——————————
 local function escape_statusline(value)
@@ -241,32 +238,54 @@ end
 
 local function update_file_size(bufnr)
     if not is_normal_file_buffer(bufnr) then
-        cache.file_sizes[bufnr] = false
+        file_sizes[bufnr] = false
         return
     end
 
     local stat = uv.fs_stat(api.nvim_buf_get_name(bufnr))
-    cache.file_sizes[bufnr] = stat and stat.size and format_file_size(stat.size) or false
+    file_sizes[bufnr] = stat and stat.size and format_file_size(stat.size) or false
 end
 
-local function update_diagnostics(bufnr)
-    if not api.nvim_buf_is_valid(bufnr) then
-        return
+local diagnostic_styles = {
+    {
+        severity = vim.diagnostic.severity.ERROR,
+        icon = "\u{f057} ",
+        label = "E:",
+        highlight = "StatuslineDiagnosticError",
+    },
+    {
+        severity = vim.diagnostic.severity.WARN,
+        icon = "\u{f071} ",
+        label = "W:",
+        highlight = "StatuslineDiagnosticWarn",
+    },
+}
+
+local function format_diagnostics(counts)
+    local result = {}
+
+    for _, style in ipairs(diagnostic_styles) do
+        local count = counts[style.severity] or 0
+        if count > 0 then
+            local label = config.icons_enabled and style.icon or style.label
+            result[#result + 1] = string.format(
+                "%%#%s#%s%d%%#StatusLine#",
+                style.highlight,
+                label,
+                count
+            )
+        end
     end
 
-    local counts = vim.diagnostic.count(bufnr)
-    cache.diagnostics[bufnr] = {
-        errors = counts[vim.diagnostic.severity.ERROR] or 0,
-        warnings = counts[vim.diagnostic.severity.WARN] or 0,
-    }
+    return table.concat(result, " ")
 end
 
 -- —————————— 状态栏组件 ——————————
-function M.components.mode()
+function components.mode()
     local definition = modes[mode_kind(api.nvim_get_mode().mode)] or modes.unknown
     local label = definition.name
 
-    if M.config.icons_enabled then
+    if config.icons_enabled then
         label = definition.icon .. "  " .. label
     end
 
@@ -279,14 +298,14 @@ function M.components.mode()
     })
 end
 
-function M.components.filename(bufnr, width)
+function components.filename(bufnr, width)
     local name = api.nvim_buf_get_name(bufnr)
 
     if name == "" then
         return "[No Name]"
     end
 
-    if width < M.config.widths.medium then
+    if width < config.widths.medium then
         name = vim.fs.basename(name)
     else
         name = vim.fn.fnamemodify(name, ":~:.")
@@ -295,7 +314,7 @@ function M.components.filename(bufnr, width)
     return "%<" .. escape_statusline(name)
 end
 
-function M.components.file_flags(bufnr)
+function components.file_flags(bufnr)
     local flags = {}
 
     if vim.bo[bufnr].modified then
@@ -309,11 +328,11 @@ function M.components.file_flags(bufnr)
     return table.concat(flags, " ")
 end
 
-function M.components.file_type(bufnr)
+function components.file_type(bufnr)
     local filetype = vim.bo[bufnr].filetype
     filetype = filetype ~= "" and filetype or "text"
 
-    if not M.config.icons_enabled then
+    if not config.icons_enabled then
         return escape_statusline(filetype)
     end
 
@@ -321,57 +340,35 @@ function M.components.file_type(bufnr)
     return escape_statusline(icon .. " " .. filetype)
 end
 
-function M.components.file_size(bufnr)
-    if not M.config.show_file_size or vim.bo[bufnr].modified then
+function components.file_size(bufnr)
+    if not config.show_file_size or vim.bo[bufnr].modified then
         return ""
     end
 
-    if cache.file_sizes[bufnr] == nil then
+    if file_sizes[bufnr] == nil then
         return ""
     end
 
-    local size = cache.file_sizes[bufnr]
+    local size = file_sizes[bufnr]
     if not size then
         return ""
     end
 
-    if M.config.icons_enabled then
+    if config.icons_enabled then
         return "\u{f016} " .. size
     end
 
     return size
 end
 
-function M.components.diagnostics(bufnr)
-    if not M.config.show_diagnostics then
+function components.diagnostics(bufnr)
+    if not config.show_diagnostics then
         return ""
     end
 
-    local diagnostics = cache.diagnostics[bufnr]
-    if not diagnostics or (diagnostics.errors == 0 and diagnostics.warnings == 0) then
-        return ""
-    end
-
-    local result = {}
-    if diagnostics.errors > 0 then
-        local label = M.config.icons_enabled and "\u{f057} " or "E:"
-        result[#result + 1] = string.format(
-            "%%#StatuslineDiagnosticError#%s%d%%#StatusLine#",
-            label,
-            diagnostics.errors
-        )
-    end
-
-    if diagnostics.warnings > 0 then
-        local label = M.config.icons_enabled and "\u{f071} " or "W:"
-        result[#result + 1] = string.format(
-            "%%#StatuslineDiagnosticWarn#%s%d%%#StatusLine#",
-            label,
-            diagnostics.warnings
-        )
-    end
-
-    return table.concat(result, " ")
+    local status = vim.diagnostic.status(bufnr)
+    -- 原生组件会重置高亮，后续组件继续使用当前状态栏的配色。
+    return status ~= "" and (status .. "%#StatusLine#") or ""
 end
 
 -- —————————— 状态栏渲染 ——————————
@@ -381,17 +378,17 @@ function M.render()
     local separator = " › "
 
     local left = join_nonempty({
-        M.components.mode(),
+        components.mode(),
         join_nonempty({
-            M.components.filename(bufnr, width),
-            M.components.file_flags(bufnr),
+            components.filename(bufnr, width),
+            components.file_flags(bufnr),
         }, " "),
     }, separator)
 
     local right = {
-        width >= M.config.widths.medium and M.components.diagnostics(bufnr) or "",
-        width >= M.config.widths.medium and M.components.file_type(bufnr) or "",
-        width >= M.config.widths.wide and M.components.file_size(bufnr) or "",
+        width >= config.widths.medium and components.diagnostics(bufnr) or "",
+        width >= config.widths.medium and components.file_type(bufnr) or "",
+        width >= config.widths.wide and components.file_size(bufnr) or "",
         "%l:%c",
         "%P",
     }
@@ -400,7 +397,7 @@ function M.render()
 end
 
 -- —————————— 高亮与缓存 ——————————
-function M.setup_highlights()
+local function setup_highlights()
     for _, definition in pairs(modes) do
         if definition.source then
             set_mode_highlight(definition.highlight, definition.source)
@@ -413,13 +410,6 @@ function M.setup_highlights()
     set_inline_highlight("StatuslineReadonly", "DiagnosticError")
 end
 
-function M.refresh(bufnr)
-    bufnr = bufnr or api.nvim_get_current_buf()
-    update_file_size(bufnr)
-    update_diagnostics(bufnr)
-    redraw_statusline()
-end
-
 local function setup_autocmds()
     local group = api.nvim_create_augroup("UserStatusline", {
         clear = true,
@@ -430,7 +420,7 @@ local function setup_autocmds()
         pattern = "*",
         desc = "Refresh statusline highlights",
         callback = function()
-            M.setup_highlights()
+            setup_highlights()
             redraw_statusline()
         end,
     })
@@ -450,22 +440,9 @@ local function setup_autocmds()
         pattern = "*",
         desc = "Initialize statusline buffer cache",
         callback = function(event)
-            if cache.file_sizes[event.buf] == nil then
+            if file_sizes[event.buf] == nil then
                 update_file_size(event.buf)
             end
-            if cache.diagnostics[event.buf] == nil then
-                update_diagnostics(event.buf)
-            end
-            redraw_statusline()
-        end,
-    })
-
-    api.nvim_create_autocmd("DiagnosticChanged", {
-        group = group,
-        pattern = "*",
-        desc = "Refresh cached statusline diagnostics",
-        callback = function(event)
-            update_diagnostics(event.buf)
             redraw_statusline()
         end,
     })
@@ -475,8 +452,7 @@ local function setup_autocmds()
         pattern = "*",
         desc = "Clear statusline buffer cache",
         callback = function(event)
-            cache.file_sizes[event.buf] = nil
-            cache.diagnostics[event.buf] = nil
+            file_sizes[event.buf] = nil
         end,
     })
 
@@ -490,18 +466,20 @@ end
 
 -- —————————— 初始化 ——————————
 function M.setup(opts)
-    M.config = vim.tbl_deep_extend("force", vim.deepcopy(defaults), opts or {})
+    config = vim.tbl_deep_extend("force", vim.deepcopy(defaults), opts or {})
 
     _G.CustomStatusline = {
         render = M.render,
     }
 
     vim.o.laststatus = 3
-    M.setup_highlights()
+    setup_highlights()
+    vim.diagnostic.config({ status = { format = format_diagnostics } })
     setup_autocmds()
-    M.refresh()
+    update_file_size(api.nvim_get_current_buf())
 
     vim.o.statusline = "%!v:lua.CustomStatusline.render()"
+    redraw_statusline()
 end
 
 return M

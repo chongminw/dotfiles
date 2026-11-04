@@ -1,4 +1,5 @@
 require("core.options")
+vim.cmd.colorscheme("catppuccin")
 require("core.autocmds")
 require("core.keymaps")
 require("config.lazy")

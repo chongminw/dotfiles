@@ -1,32 +1,11 @@
 return {
     {
-        "nvim-treesitter/nvim-treesitter",
-        branch = "main",
-        lazy = false,
-        build = ":TSUpdate",
-        config = function()
-            require("nvim-treesitter").setup({})
-
-            vim.api.nvim_create_autocmd("FileType", {
-                group = vim.api.nvim_create_augroup("UserMarkdownTreesitter", {
-                    clear = true,
-                }),
-                pattern = "markdown",
-                desc = "Enable Tree-sitter highlighting for Markdown",
-                callback = function(event)
-                    vim.treesitter.start(event.buf)
-                end,
-            })
-        end,
-    },
-    {
         "MeanderingProgrammer/render-markdown.nvim",
         branch = "main",
         version = "*",
         ft = { "markdown" },
         cmd = "RenderMarkdown",
         dependencies = {
-            "nvim-treesitter/nvim-treesitter",
             "nvim-mini/mini.icons",
         },
         keys = {

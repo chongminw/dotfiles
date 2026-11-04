@@ -2,6 +2,7 @@ return {
     {
         "nvim-mini/mini.icons",
         version = "*",
+        lazy = false,
         config = function()
             local icons = require("mini.icons")
             icons.setup()
