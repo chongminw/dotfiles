@@ -1,6 +1,6 @@
 # dotfiles
 
-个人 Bash 与 Wayland 桌面配置的源码归档，用于集中阅读、记录修改和保留迁移参考。
+个人 Bash、Neovim 与 Wayland 桌面配置的源码归档，用于集中阅读、记录修改和保留迁移参考。
 
 ```text
 dotfiles/
@@ -8,6 +8,7 @@ dotfiles/
 │   ├── etc/                  # 系统 Bash 入口
 │   ├── home/                 # 用户 Shell 入口、barc 设置和桌面会话入口
 │   └── usr/local/            # barc 程序源码及命令入口
+├── nvim/                    # Neovim 配置、快捷键、状态栏与插件版本锁
 └── desktop/
     ├── niri/                 # 窗口管理器配置、快捷键及截图脚本
     ├── mako/                 # 通知服务配置
@@ -23,6 +24,7 @@ dotfiles/
 | 组件 | 文档或配置 |
 | --- | --- |
 | barc | [模块化 Bash 配置说明](barc/usr/local/lib/barc/README.md) |
+| nvim | [Neovim 配置说明](nvim/README.md) |
 | 桌面集合 | [目录导航、组件关系与现用位置](desktop/README.md) |
 | niri | [配置维护说明](desktop/niri/README.md) |
 | mako | [通知配置](desktop/mako/config) |
@@ -34,6 +36,8 @@ dotfiles/
 
 `barc` 同时涉及系统入口、用户入口和程序源码，保留 `etc/`、`home/`、`usr/` 的系统路径镜像。
 其中 `home/` 表示用户主目录下的内容；桌面组件各自直接收纳配置和源码。
+
+`nvim/` 对应本机 `~/.config/nvim/`，加载入口为 [init.lua](nvim/init.lua)。
 
 barc 的用户登录入口加载 [session.bash](barc/home/.config/barc/session.bash)，满足 tty1 等条件时启动 `niri-session -l`。
 niri 和 Waybar 共用 `commenu` 提供启动器、电源菜单；Waybar 的通知菜单也复用其菜单会话管理。
