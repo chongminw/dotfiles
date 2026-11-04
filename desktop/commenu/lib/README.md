@@ -38,10 +38,4 @@ Niri 和 Waybar 统一调用 `~/.local/bin/commenu`，修改菜单功能时只�
 依赖 Bash、fuzzel、Ghostty、`flock`、`setsid`、`pgrep` 和标准文件工具；
 电源操作还使用 Niri 和 systemd 用户会话所在系统。
 
-离线回归测试位于 `~/.config/waybar/tests`，使用临时 HOME 和假桌面命令：
-
-```sh
-python3 -B -m unittest discover -s "$HOME/.config/waybar/tests" -v
-```
-
 迁移机器时一并复制公共命令和本目录；Waybar 的通知菜单也依赖此公共实现。

@@ -1,12 +1,12 @@
 # Desktop 配置源码
 
-集中阅读和归档当前桌面的配置、脚本、说明及测试，保留现有源码和调用关系。
+集中阅读和归档当前桌面的配置、脚本及说明，保留现有源码和调用关系。
 
 ```text
 desktop/
-├── niri/                 # 配置入口、模块、快捷键、截图脚本及测试
+├── niri/                 # 配置入口、模块、快捷键及截图脚本
 ├── mako/                 # 通知服务配置
-├── waybar/               # 状态栏配置、天气与通知脚本及测试
+├── waybar/               # 状态栏配置、天气与通知脚本
 ├── ghostty/              # 终端配置和分屏快捷键说明
 └── commenu/
     ├── bin/commenu       # 公共菜单命令入口
@@ -44,18 +44,3 @@ Waybar 的通知状态、勿扰、历史恢复与清理脚本配合 mako 配置�
 - 程序、字体等依赖见各组件 README。
 
 本目录用于源码归档，不包含部署脚本。Python 缓存、运行数据和改名前备份不收纳。
-
-## 仓库内离线测试
-
-在仓库根目录执行：
-
-```sh
-python3 -B -m unittest discover -s desktop/niri/tests -v
-python3 -B -m unittest discover -s desktop/waybar/tests -v
-```
-
-Waybar 菜单测试默认使用同级 `commenu/lib/` 和 `commenu/bin/commenu` 中的仓库源码，
-再将它们复制到测试的临时 HOME；测试中的桌面和电源命令均由假命令替代。
-测试已安装的 Waybar 配置时，若没有同级仓库目录，则使用 `~/.local` 中的公共菜单。
-需要显式选择其他版本时，可用 `COMMENU_TEST_ROOT` 指定菜单库目录，
-用 `COMMENU_TEST_BIN` 指定菜单入口文件。

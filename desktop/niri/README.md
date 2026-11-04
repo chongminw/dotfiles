@@ -64,12 +64,6 @@ niri validate -c "$HOME/.config/niri/config.kdl"
 niri validate -c /tmp/niri-candidate/config.kdl
 ```
 
-截图脚本的离线测试仅使用假命令，不连接桌面或修改剪贴板：
-
-```sh
-python3 -B -m unittest discover -s "$HOME/.config/niri/tests" -v
-```
-
 配置文件保存后由 niri 自动重载，包括已加载的子文件。启动项在会话启动时执行，修改后需在下一次会话启动时确认效果。
 
 检查当前会话的配置加载日志：
