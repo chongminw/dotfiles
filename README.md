@@ -40,6 +40,9 @@ dotfiles/
 `nvim/` 对应本机 `~/.config/nvim/`，加载入口为 [init.lua](nvim/init.lua)。
 
 barc 的用户登录入口加载 [session.bash](barc/home/.config/barc/session.bash)，满足 tty1 等条件时启动 `niri-session -l`。
+barc 的 `aliases` 模块将 `ls` 指向 `lsd`，`ll`、`la`、`lt` 继续通过 `ls` 调用，因此需要预先安装 `lsd`。
+`barc/usr/local/bin/vim` 是指向 `/usr/bin/nvim` 的符号链接，需要安装 Neovim；`vim` 通过该命令入口使用 Neovim，无需额外的 Shell 别名。
+
 niri 和 Waybar 共用 `commenu` 提供启动器、电源菜单；Waybar 的通知菜单也复用其菜单会话管理。
 waybar 的通知状态、勿扰和历史操作配合 mako 配置使用。
 
