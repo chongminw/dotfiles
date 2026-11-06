@@ -43,7 +43,7 @@ Waybar 由 `graphical-session.target` 下的用户级 `waybar.service` 启动；
 天气数据按获取、校验、图标选择和输出分层；通知协议与展示、历史恢复分开。通知菜单业务保留在 Waybar 中，只复用公共菜单生命周期管理。
 公共菜单与通知操作共用 `waybar` 运行目录和锁文件，确保会话登记和互斥保持一致。复制配置时需一并保留公共命令和实现。
 
-## 重载
+## 检查与重载
 
 ```bash
 systemctl --user restart waybar.service

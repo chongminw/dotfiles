@@ -1,0 +1,8 @@
+[mgr]
+show_hidden = true
+
+[tasks]
+# 图片解码尺寸上限：宽 20000、高 10000 像素。
+image_bound = [20000, 10000]
+# 单张图片的解码内存上限：1 GiB。
+image_alloc = 1073741824

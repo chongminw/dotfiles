@@ -12,7 +12,7 @@ output "DP-1" {
 screenshot-path "~/.pictures/Screenshots/Screenshot from %Y-%m-%d %H-%M-%S.png"
 
 // 会话启动时加载壁纸；修改路径时同步检查资源是否存在。
-spawn-at-startup "swaybg" "-i" "/home/min/.pictures/Wallpapers/6.png" "-m" "fill" "-c" "#1e1e2e"
+spawn-at-startup "swaybg" "-i" "/home/min/.pictures/Wallpapers/1.png" "-m" "fill" "-c" "#1e1e2e"
 
 // 本机安装的权限认证代理。
 spawn-at-startup "/usr/lib/polkit-gnome/polkit-gnome-authentication-agent-1"

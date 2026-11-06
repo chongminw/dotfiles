@@ -56,6 +56,27 @@ BARC_HISTFILESIZE=40000
 无需改变当前 shell 状态的工具，优先做成 `~/.local/bin` 下的独立命令；
 需要切换当前目录、设置环境变量、别名或 shell 选项的功能才放进 barc。
 
+## fzf 与 zoxide 系统模块
+
+系统模块位于 `modules/fzf.bash` 和 `modules/zoxide.bash`，默认清单已启用两者。
+`fzf` 在 `completion` 之后加载；`zoxide` 放在模块清单末尾。
+
+| 模块 | 提供的功能 | 外部程序 |
+| --- | --- | --- |
+| `fzf` | `Ctrl-R` 搜索历史、`Ctrl-T` 插入路径、`Alt-C` 选择目录、`**` 模糊补全 | `fzf` |
+| `zoxide` | `z` / `zi`、目录记录和补全 | `zoxide`；`zi` 另需 `fzf` |
+
+程序未安装时跳过初始化；生成或加载初始化脚本失败时，模块返回错误，由 `barc status` 报告。
+初始化由现有加载器管理，同一 shell 不会重复加载。
+
+个人 `FZF_*`、`_ZO_*` 参数放在 `settings.bash`，需要传给子程序的参数使用 `export`。
+zoxide 数据库按用户保存，不放进系统模块目录。`local.bash` 最后加载；若调整
+`PROMPT_COMMAND`，应保留已有条目，以免移除 zoxide 的目录记录钩子。
+
+已有用户 `modules.conf` 仍整表替换默认清单；需要启用这两个模块时，保留或加入对应名称。
+不要同时保留同名用户模块，否则加载器会报冲突。迁移后打开新 shell，并运行
+`barc status` 确认两项来源为系统模块目录。
+
 ## 添加个人模块
 
 用户模块与内置模块共用一份清单，严格按清单顺序加载，不自动扫描目录。
