@@ -1,14 +1,14 @@
 # dotfiles
 
-个人 Bash、Neovim、Yazi 与 Wayland 桌面配置的源码归档，用于集中阅读、记录修改和保留迁移参考。
+个人 bash、neovim、yazi 与 wayland 桌面配置的源码归档，用于集中阅读、记录修改和保留迁移参考。
 
 ```text
 dotfiles/
 ├── barc/
-│   ├── etc/                  # 系统 Bash 入口
-│   ├── home/                 # 用户 Shell 入口、barc 设置和桌面会话入口
+│   ├── etc/                  # 系统 bash 入口
+│   ├── home/                 # 用户 shell 入口、barc 设置和桌面会话入口
 │   └── usr/local/            # barc 程序源码及命令入口
-├── nvim/                    # Neovim 配置、快捷键、状态栏与插件版本锁
+├── nvim/                    # neovim 配置、快捷键、状态栏与插件版本锁
 ├── yazi/                    # 文件管理器配置、隐藏文件及图片解码限制
 └── desktop/
     ├── niri/                 # 窗口管理器配置、快捷键及截图脚本
@@ -24,10 +24,10 @@ dotfiles/
 
 | 组件 | 文档或配置 |
 | --- | --- |
-| barc | [模块化 Bash 配置说明](barc/usr/local/lib/barc/README.md) |
-| nvim | [Neovim 配置说明](nvim/README.md) |
-| yazi | [Yazi 配置](yazi/yazi.toml) |
-| 桌面集合 | [目录导航、组件关系与现用位置](desktop/README.md) |
+| barc | [模块化 bash 配置说明](barc/usr/local/lib/barc/README.md) |
+| nvim | [neovim 配置说明](nvim/README.md) |
+| yazi | [yazi 配置](yazi/yazi.toml) |
+| desktop | [目录导航、组件关系与现用位置](desktop/README.md) |
 | niri | [配置维护说明](desktop/niri/README.md) |
 | mako | [通知配置](desktop/mako/config) |
 | waybar | [状态栏与脚本说明](desktop/waybar/README.md) |
@@ -47,7 +47,7 @@ dotfiles/
 
 barc 的用户登录入口加载 [session.bash](barc/home/.config/barc/session.bash)，满足 tty1 等条件时启动 `niri-session -l`。
 barc 的 `aliases` 模块将 `ls` 指向 `lsd`，`ll`、`la`、`lt` 继续通过 `ls` 调用，因此需要预先安装 `lsd`。
-`barc/usr/local/bin/vim` 是指向 `/usr/bin/nvim` 的符号链接，需要安装 Neovim；`vim` 通过该命令入口使用 Neovim，无需额外的 Shell 别名。
+`barc/usr/local/bin/vim` 是指向 `/usr/bin/nvim` 的符号链接，需要安装 neovim；`vim` 通过该命令入口使用 neovim，无需额外的 shell 别名。
 
 niri 和 Waybar 共用 `commenu` 提供启动器、电源菜单；Waybar 的通知菜单也复用其菜单会话管理。
 waybar 的通知状态、勿扰和历史操作配合 mako 配置使用。
